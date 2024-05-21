@@ -1,9 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import Dashboard from "../pages/Dashboard";
+import { screen } from "../components/utils-screen";
 
 // Mock components used in Dashboard
 import DashProfile from "../components/DashProfile";
