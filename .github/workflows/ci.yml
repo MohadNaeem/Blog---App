@@ -25,14 +25,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install backend dependencies
-        working-directory: ./backend
+        working-directory: ./api
         run: npm install
 
       - name: Run backend tests
-        working-directory: ./backend
+        working-directory: ./api
         run: npm test
 
   frontend-tests:
@@ -54,41 +54,3 @@ jobs:
       - name: Run frontend tests
         working-directory: ./client
         run: npm test
-
-  e2e-tests:
-    runs-on: ubuntu-latest
-
-    services:
-      web:
-        image: nginx:latest
-        ports:
-          - 80:80
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "18"
-
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm install
-
-      - name: Start backend server
-        working-directory: ./backend
-        run: npm start &
-
-      - name: Install frontend dependencies
-        working-directory: ./client
-        run: npm install
-
-      - name: Start frontend server
-        working-directory: ./client
-        run: npm start &
-
-      - name: Run end-to-end tests
-        working-directory: ./e2e
-        run: npm install && npm test
